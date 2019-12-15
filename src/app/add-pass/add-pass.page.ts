@@ -31,6 +31,14 @@ export class AddPassPage {
   addItem() {
     if (this.index === -1) {
       this.pass.tags.push('all');
+      const tempTags = [];
+      for (const tag of this.pass.tags) {
+        if (tag.trim().length > 0 && !tempTags.includes(tag)) {
+          tempTags.push(tag.toLowerCase().trim());
+        }
+      }
+      this.pass.tags = tempTags;
+      this.pass.email = this.pass.email.toLowerCase().trim();
       this.data.addPassword(this.pass);
     } else {
       this.data.save();
