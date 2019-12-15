@@ -3,13 +3,13 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Momma's Passwords</ion-title>
+          <ion-title>Categories</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let cat of data.categories">
-            <ion-item (click)="data.setFilter(cat)" [ngClass]="{'is_active' : cat.name == data.filter}">
+            <ion-item (click)="data.setFilter(cat.name)" [ngClass]="{'is_active' : cat.name == data.filter}">
               <ion-note slot="end">{{cat.count}}</ion-note>
               <ion-label class="ion-text-capitalize">
                 {{cat.name}}

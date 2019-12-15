@@ -11,7 +11,7 @@
   <ion-row>
     <ion-col *ngFor="let pass of data.currPasswords; let i = index" size="12" size-md="4" size-sm="6">
       <ion-card>
-        <ion-card-title (click)="editPass(pass, i)">
+        <ion-card-title (click)="editPass(pass, i)" class="ion-text-capitalize">
           {{pass.name}}
           <ion-icon name="md-create" size="small" color="primary"></ion-icon>
         </ion-card-title>
@@ -28,6 +28,9 @@
         </ion-row>
         <p *ngIf="pass.notes" class="info-header">Notes</p>
         <p class="info-body">{{pass.notes}}</p>
+        <ion-chip color="tertiary" *ngFor="let word of pass.tags">
+          <ion-label [ngClass]="{'is_active' : word == data.filter}" color="dark" (click)="data.setFilter(word)">{{word}}</ion-label>
+        </ion-chip>
       </ion-card>
     </ion-col>
   </ion-row>

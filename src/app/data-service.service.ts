@@ -100,7 +100,7 @@ export class DataProvider {
   }
 
   setFilter(cat) {
-    this.filter = cat.name;
+    this.filter = cat;
     this.filterPass();
   }
 
