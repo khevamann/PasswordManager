@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
+import * as saveAs from 'file-saver';
+import {HttpClient} from '@angular/common/http';
 
 export interface Password {
   name: string;
@@ -24,7 +26,7 @@ export class DataProvider {
   categories: Array<Category>;
   autocomplete = {email: [], password: [], tags: []};
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, private http: HttpClient) {
     this.loadPasswords();
   }
 
@@ -134,5 +136,16 @@ export class DataProvider {
           return item.includes(value) && item !== value;
         });
     }
+  }
+
+  loadPasswordFile() {
+    this.http.get('assets/pword.txt', {responseType: 'text'}).subscribe(data => {
+      this.myPasswords = JSON.parse(data);
+      this.save();
+    });
+  }
+  savePasswordFile() {
+    const file = new Blob([JSON.stringify(this.myPasswords)], {type: 'text/txt;charset=utf-8'});
+    saveAs(file, 'pword.txt');
   }
 }

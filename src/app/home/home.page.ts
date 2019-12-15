@@ -10,7 +10,7 @@ import {DataProvider} from '../data-service.service';
 })
 export class HomePage {
 
-  constructor(private modalController: ModalController, private data: DataProvider, private toastCtrl: ToastController) {
+  constructor(private modalController: ModalController, public data: DataProvider, private toastCtrl: ToastController) {
   }
 
   search(event) {

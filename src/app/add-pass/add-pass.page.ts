@@ -11,7 +11,7 @@ export class AddPassPage {
   pass: Password = {name: '', email: '', pass: '', notes: '', tags: []};
   index = -1;
 
-  constructor(private data: DataProvider,
+  constructor(public data: DataProvider,
               private modalCtrl: ModalController,
               private alertController: AlertController) {
   }
