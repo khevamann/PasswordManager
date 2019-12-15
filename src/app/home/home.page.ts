@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ModalController, ToastController} from '@ionic/angular';
 import {AddPassPage} from '../add-pass/add-pass.page';
-import {DataProvider, Password} from '../data-service.service';
+import {DataProvider} from '../data-service.service';
 
 @Component({
   selector: 'app-home',
@@ -9,26 +9,13 @@ import {DataProvider, Password} from '../data-service.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  passwords: Array<Password>;
 
   constructor(private modalController: ModalController, private data: DataProvider, private toastCtrl: ToastController) {
-    this.getPasswords();
   }
 
-  async getPasswords() {
-    this.passwords = await this.data.loadPasswords();
-  }
   search(event) {
     const value = event.target.value.toLowerCase().trim();
-    this.passwords = this.data.currPasswords.filter(
-      (pass) => {
-        const name = pass.name.toLowerCase();
-        return name.includes(value);
-      });
-  }
-
-  clearSearch() {
-    this.passwords = this.data.currPasswords;
+    this.data.filterPass(value);
   }
 
   async addPass() {

@@ -105,12 +105,14 @@ export class DataProvider {
 
   setFilter(cat) {
     this.filter = cat.name;
-    const newPass: Array<Password> = [];
-    for (const pass of this.myPasswords) {
-      if (pass.tags.indexOf(cat.name)) {
-        newPass.push(pass);
-      }
-    }
-    this.currPasswords = newPass;
+    this.filterPass();
+  }
+
+  filterPass(value = '') {
+    this.currPasswords = this.myPasswords.filter(
+      (pass) => {
+        const name = pass.name.toLowerCase();
+        return name.includes(value) && pass.tags.includes(this.filter);
+      });
   }
 }
