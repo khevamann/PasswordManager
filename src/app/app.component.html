@@ -3,16 +3,16 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Menu</ion-title>
+          <ion-title>Momma's Passwords</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label>
-                {{p.title}}
+          <ion-menu-toggle auto-hide="false" *ngFor="let cat of data.categories">
+            <ion-item (click)="data.setFilter(cat)" [ngClass]="{'is_active' : cat.name == data.filter}">
+              <ion-note slot="end">{{cat.count}}</ion-note>
+              <ion-label class="ion-text-capitalize">
+                {{cat.name}}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
