@@ -20,6 +20,14 @@ export class AddPassPage {
     this.pass.tags = data.split(' ');
   }
 
+  addTag(word) {
+    if (this.pass.tags.length === 0) {
+      this.pass.tags.push(word);
+      return;
+    }
+    this.pass.tags[this.pass.tags.length - 1] = word;
+  }
+
   addItem() {
     if (this.index === -1) {
       this.pass.tags.push('all');

@@ -80,11 +80,7 @@ export class DataProvider {
     for (const item of this.autocomplete.tags) {
       this.categories.push({name: item, count: tempTags[item]});
     }
-
-    console.log(this.autocomplete);
-    console.log(tempPass);
-    console.log(tempEmail);
-    console.log(tempTags);
+    this.autocomplete.tags.shift();
   }
 
   addPassword(passwordObj: Password) {
@@ -114,5 +110,29 @@ export class DataProvider {
         const name = pass.name.toLowerCase();
         return name.includes(value) && pass.tags.includes(this.filter);
       });
+  }
+
+  filterAc(value = '', type) {
+    if (type === 'pass') {
+      return this.autocomplete.password.filter(
+        (item) => {
+          item = item.trim();
+          return item.includes(value) && item !== value;
+        });
+    }
+    if (type === 'email') {
+      return this.autocomplete.email.filter(
+        (item) => {
+          item = item.trim();
+          return item.includes(value) && item !== value;
+        });
+    }
+    if (type === 'tags') {
+      return this.autocomplete.tags.filter(
+        (item) => {
+          item = item.trim();
+          return item.includes(value) && item !== value;
+        });
+    }
   }
 }
