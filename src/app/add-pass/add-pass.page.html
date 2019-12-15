@@ -1,0 +1,40 @@
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Account Information
+      <ion-button *ngIf="index != -1" fill="clear" (click)="deletePass()">
+        <ion-icon name="trash" color="danger"></ion-icon>
+      </ion-button>
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Service Name</ion-label>
+      <ion-input [(ngModel)]="pass.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Username/Email</ion-label>
+      <ion-input [(ngModel)]="pass.email"></ion-input>
+    </ion-item>
+    <ion-chip color="tertiary" *ngFor="let email of data.autocomplete.email">
+      <ion-label color="dark" class="ion-text-lowercase" (click)="pass.email = email">{{email}}</ion-label>
+    </ion-chip>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Password</ion-label>
+      <ion-input [(ngModel)]="pass.pass"></ion-input>
+    </ion-item>
+    <ion-chip color="tertiary" *ngFor="let word of data.autocomplete.password">
+      <ion-label color="dark" class="ion-text-lowercase" (click)="pass.pass = word">{{word}}</ion-label>
+    </ion-chip>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Notes</ion-label>
+      <ion-textarea [(ngModel)]="pass.notes"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Tags</ion-label>
+      <ion-textarea [ngModel]="pass.tags.join(' ')" (ngModelChange)="editTags($event)"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <div class="ion-text-center">
+    <ion-button class="ion-text-center" color="primary" fill="outline" (click)="close()">Cancel</ion-button>
+    <ion-button class="ion-text-center" color="primary" (click)="addItem()">Save</ion-button>
+  </div>
+</ion-content>
