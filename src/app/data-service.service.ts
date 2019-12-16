@@ -21,6 +21,8 @@ export interface Category {
 })
 export class DataProvider {
   filter = 'all';
+  login = '';
+  isAuthed = false;
   myPasswords: Array<Password>;
   currPasswords: Array<Password>;
   categories: Array<Category>;
@@ -31,14 +33,21 @@ export class DataProvider {
   }
 
   async loadPasswords() {
-    if (this.myPasswords) {
-      return this.myPasswords;
-    }
     const value: Array<Password> = await this.storage.get('passwords') || [];
     this.myPasswords = value;
     this.currPasswords = value;
     this.setAutoComplete();
-    return value;
+  }
+
+  async loadUser() {
+    this.login = await this.storage.get('login') || '';
+    console.log(this.login);
+  }
+
+  setLogin(pass) {
+    this.login = pass;
+    this.isAuthed = true;
+    this.storage.set('login', pass);
   }
 
   setAutoComplete() {
@@ -138,12 +147,19 @@ export class DataProvider {
     }
   }
 
-  loadPasswordFile() {
-    this.http.get('assets/pword.txt', {responseType: 'text'}).subscribe(data => {
-      this.myPasswords = JSON.parse(data);
+  loadPasswordFile(file) {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      if (typeof fileReader.result === 'string') {
+        this.myPasswords = JSON.parse(fileReader.result);
+        this.setAutoComplete();
+        this.filterPass();
+      }
       this.save();
-    });
+    };
+    fileReader.readAsText(file);
   }
+
   savePasswordFile() {
     const file = new Blob([JSON.stringify(this.myPasswords)], {type: 'text/txt;charset=utf-8'});
     saveAs(file, 'pword.txt');

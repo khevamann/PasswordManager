@@ -3,6 +3,9 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-header>
         <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="openSettings()"><ion-icon name="settings"></ion-icon></ion-button>
+          </ion-buttons>
           <ion-title>Categories</ion-title>
         </ion-toolbar>
       </ion-header>
@@ -17,6 +20,7 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
+        <input #inputFile type='file' (change)="fileChanged($event)" hidden>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

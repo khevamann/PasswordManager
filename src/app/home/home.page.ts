@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ModalController, ToastController} from '@ionic/angular';
+import {MenuController, ModalController, ToastController} from '@ionic/angular';
 import {AddPassPage} from '../add-pass/add-pass.page';
 import {DataProvider} from '../data-service.service';
 
@@ -10,7 +10,11 @@ import {DataProvider} from '../data-service.service';
 })
 export class HomePage {
 
-  constructor(private modalController: ModalController, public data: DataProvider, private toastCtrl: ToastController) {
+  constructor(private modalController: ModalController,
+              public data: DataProvider,
+              private menuCtrl: MenuController,
+              private toastCtrl: ToastController) {
+    this.menuCtrl.enable(true);
   }
 
   search(event) {

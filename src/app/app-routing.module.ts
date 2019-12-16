@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'add-pass',
     loadChildren: () => import('./add-pass/add-pass.module').then( m => m.AddPassPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
 ];
 
