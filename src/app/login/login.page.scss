@@ -1,0 +1,27 @@
+ion-img {
+  width: 60vw;
+  height: 60vw;
+  max-width: 300px;
+  max-height: 300px;
+  margin: 50px auto;
+}
+
+ion-input {
+  border-radius: 10px;
+  border: 2px solid var(--ion-color-primary);
+  width: 90%;
+  max-width: 300px;
+  margin: 20vh auto auto;
+}
+
+
+
+ion-button {
+  margin-top: 10px;
+}
+
+.err-msg{
+  color: red;
+  margin: 0;
+  padding: 0;
+}
