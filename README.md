@@ -1,5 +1,5 @@
 <p align="center">
-   <img alt="PasswordManager Logo" title="PasswordManager Logo" src="src/assets/icons/icon-512x512.png" width="200">
+   <img alt="PasswordManager Logo" title="PasswordManager Logo" src="src/assets/icons/icon-512x512.png" target="_blank" width="200">
 </p>
 
 <p align="center">
