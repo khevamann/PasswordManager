@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import * as saveAs from 'file-saver';
+import {PasswordEncryptionService} from './password-encryption.service';
 
 export interface Password {
   name: string;
@@ -140,10 +141,13 @@ export class DataProvider {
   }
 
   loadPasswordFile(file) {
+    const encryptor = new PasswordEncryptionService(this.login);
     const fileReader = new FileReader();
     fileReader.onload = () => {
       if (typeof fileReader.result === 'string') {
-        this.myPasswords = JSON.parse(fileReader.result);
+        // Decrypt passwords from file
+        const decryptedRes = encryptor.decrypt(fileReader.result);
+        this.myPasswords = JSON.parse(decryptedRes);
         this.setAutoComplete();
         this.filterPass();
       }
@@ -153,8 +157,13 @@ export class DataProvider {
   }
 
   savePasswordFile() {
-    const file = new Blob([JSON.stringify(this.myPasswords)], {type: 'text/txt;charset=utf-8'});
-    saveAs(file, 'pword.txt');
+    // Encrypt passwords and save to file
+    const encryptor = new PasswordEncryptionService(this.login);
+    const passwordStr = JSON.stringify(this.myPasswords);
+    const encryptedPass = encryptor.encrypt(passwordStr);
+
+    const file = new Blob([encryptedPass], {type: 'text/txt;charset=utf-8'});
+    saveAs(file, 'password_export.txt');
   }
 
 
