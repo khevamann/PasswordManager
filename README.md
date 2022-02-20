@@ -17,12 +17,12 @@ A simple password manager I made to digitize personal passwords. PWA made using 
 - Easily copy your passwords to use
 - Password Protected
 - Import or export your passwords to use on other devices
+- Passwords are encrypted using AES by your master password
 
 ## Planned Features
 
 - Make login more intuitive
 - Make import/ export simpler
-- Encrypt all information
 
 
 ## Screenshots
