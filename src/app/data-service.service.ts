@@ -23,31 +23,49 @@ export interface Category {
 export class DataProvider {
   filter = 'all';
   login = '';
-  isAuthed = false;
+  isFirstLogin = true;
   myPasswords: Array<Password>;
   currPasswords: Array<Password>;
   categories: Array<Category>;
   autocomplete = {email: [], password: [], tags: []};
 
-  constructor(private storage: Storage) {
-    this.loadPasswords();
-  }
+  constructor(private storage: Storage) {}
 
   async loadPasswords() {
-    const value: Array<Password> = await this.storage.get('passwords') || [];
-    this.myPasswords = value;
-    this.currPasswords = value;
+    // decrypt passwords from local storage
+    try {
+      const encryptor = new PasswordEncryptionService(this.login);
+      const encryptedPass: string = await this.storage.get('passwords');
+      const decryptedPass = encryptor.decrypt(encryptedPass);
+      const passwords: Password[] = JSON.parse(decryptedPass) || [];
+      this.myPasswords = passwords;
+      this.currPasswords = passwords;
+    } catch (err) {
+      this.myPasswords = [];
+      this.currPasswords = [];
+    }
     this.setAutoComplete();
   }
 
+  async isCorrectPassword(pass) {
+    try {
+      const encryptor = new PasswordEncryptionService(pass);
+      const encryptedPass: string = await this.storage.get('passwords');
+      const decryptedPass = encryptor.decrypt(encryptedPass);
+      JSON.parse(decryptedPass);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
   async loadUser() {
-    this.login = await this.storage.get('login') || '';
+    this.isFirstLogin = !!await this.storage.get('isFirstLogin');
   }
 
   setLogin(pass) {
     this.login = pass;
-    this.isAuthed = true;
-    this.storage.set('login', pass);
+    this.storage.set('isFirstLogin', false);
   }
 
   setAutoComplete() {
@@ -89,12 +107,16 @@ export class DataProvider {
 
   addPassword(passwordObj: Password) {
     this.myPasswords.push(passwordObj);
+    this.currPasswords.push(passwordObj);
     this.setAutoComplete();
     this.save();
   }
 
   save() {
-    this.storage.set('passwords', this.myPasswords);
+    // encrypt passwords for saving to local storage
+    const encryptor = new PasswordEncryptionService(this.login);
+    const encryptedPass = encryptor.encrypt(JSON.stringify(this.myPasswords));
+    this.storage.set('passwords', encryptedPass);
   }
 
   removePassword(index: number) {

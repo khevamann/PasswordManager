@@ -20,6 +20,9 @@ export class PasswordEncryptionService {
   }
 
   decrypt(cipherText: string) {
+    if (!cipherText) {
+      return '';
+    }
     // Get the first line as the IV and the rest as the ciphertext
     const [ivStr, cipher] = cipherText.split('\n');
     const iv = ivStr.split(',');
@@ -28,8 +31,7 @@ export class PasswordEncryptionService {
       mode: CryptoJS.mode.CBC,
     });
 
-    const base64 = decrypted.toString();
-
+    const base64 = decrypted.toString(CryptoJS.enc.Base64);
     return atob(base64);
   }
 }

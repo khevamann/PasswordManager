@@ -1,6 +1,6 @@
 <ion-content class="ion-text-center">
   <ion-img src="assets/icons/icon-512x512.png"></ion-img>
-  <ion-input type="password" placeholder="{{(data.login)?'Enter': 'Create'}} password" [(ngModel)]="pass"></ion-input>
+  <ion-input type="password" placeholder="{{(data.isFirstLogin)?'Create': 'Enter'}} password" [(ngModel)]="pass"></ion-input>
   <p *ngIf="error" class="err-msg">{{error}}</p>
-  <ion-button (click)="loginUser()">{{(data.login)?'Login': 'Start'}}</ion-button>
+  <ion-button (click)="loginUser()">{{(data.isFirstLogin)?'Start': 'Login'}}</ion-button>
 </ion-content>

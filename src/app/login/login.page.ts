@@ -21,16 +21,18 @@ export class LoginPage implements OnInit {
     this.menuCtrl.enable(false);
   }
 
-  loginUser() {
-    if (this.data.login) {
-      if (this.data.login === this.pass) {
-        this.data.isAuthed = true;
+  async loginUser() {
+    const isCorrect = await this.data.isCorrectPassword(this.pass);
+    if (!this.data.isFirstLogin) {
+      if (isCorrect) {
+        this.data.setLogin(this.pass);
+        this.data.loadPasswords();
         this.router.navigateByUrl('/home', {replaceUrl: true});
       } else {
         this.error = 'Incorrect Password!';
       }
     } else {
-      this.data.setLogin(this.pass);
+      this.data.loadPasswords();
       this.router.navigateByUrl('/home', {replaceUrl: true});
     }
   }
