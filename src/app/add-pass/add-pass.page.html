@@ -21,9 +21,12 @@
       <ion-label position="stacked" color="primary">Password</ion-label>
       <ion-input [(ngModel)]="pass.pass"></ion-input>
     </ion-item>
-    <ion-chip color="tertiary" *ngFor="let word of data.filterAc(pass.pass, 'pass').slice(0,2)">
-      <ion-label color="dark" (click)="pass.pass = word">{{word}}</ion-label>
-    </ion-chip>
+    <div style="padding: 10px">
+      <ion-text>
+        Instead of using a short password consider using a pass phrase. It will be easier to remember and harder to break.
+        <a href="https://www.worksighted.com/random-passphrase-generator/#passphrase-generator" title="Strong password generator" target="_blank">Passphrase Generator</a>
+      </ion-text>
+    </div>
     <ion-item>
       <ion-label position="stacked" color="primary">Categories</ion-label>
       <ion-input [ngModel]="pass.tags.join(' ')" (ngModelChange)="editTags($event)"></ion-input>

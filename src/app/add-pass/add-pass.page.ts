@@ -8,7 +8,7 @@ import {AlertController, ModalController} from '@ionic/angular';
   styleUrls: ['./add-pass.page.scss'],
 })
 export class AddPassPage {
-  pass: Password = {name: '', email: '', pass: '', notes: '', tags: []};
+  pass: Password = {name: '', email: '', pass: '', notes: '', tags: [], shown: false};
   index = -1;
 
   constructor(public data: DataProvider,
@@ -47,7 +47,7 @@ export class AddPassPage {
   }
 
   close() {
-    this.pass = {name: '', email: '', pass: '', notes: '', tags: []};
+    this.pass = {name: '', email: '', pass: '', notes: '', tags: [], shown: false};
     this.modalCtrl.dismiss();
   }
 

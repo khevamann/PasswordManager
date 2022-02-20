@@ -50,14 +50,9 @@ export class DataProvider {
   }
 
   setAutoComplete() {
-    const tempPass = {};
     const tempEmail = {};
     const tempTags = {};
     for (const item of this.myPasswords) {
-      if (!tempPass[item.pass]) {
-        tempPass[item.pass] = 0;
-      }
-      tempPass[item.pass] += 1;
 
       if (!tempEmail[item.email]) {
         tempEmail[item.email] = 0;
@@ -71,7 +66,6 @@ export class DataProvider {
         tempTags[tag] += 1;
       }
     }
-    this.autocomplete.password = Object.keys(tempPass);
     this.autocomplete.email = Object.keys(tempEmail);
     this.autocomplete.tags = Object.keys(tempTags);
 
@@ -82,7 +76,6 @@ export class DataProvider {
       return -1;
     };
 
-    this.autocomplete.password.sort((a, b) => isLess(a, b, tempPass));
     this.autocomplete.email.sort((a, b) => isLess(a, b, tempEmail));
     this.autocomplete.tags.sort((a, b) => isLess(a, b, tempTags));
 
