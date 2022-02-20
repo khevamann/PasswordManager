@@ -1,6 +1,6 @@
 {
   "name": "password-manager",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Kheva Mann",
   "homepage": "https://khevamann.com/",
   "scripts": {
@@ -48,5 +48,5 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "A password manager I made for my mom's passwords"
+  "description": "A password manager I made to store personal passwords"
 }

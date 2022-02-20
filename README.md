@@ -7,7 +7,7 @@
 </p>
 
 # PasswordManager
-A simple password manager I made for my mom to digitize her passwords. Made using Ionic and Angular.
+A simple password manager I made to digitize personal passwords. PWA made using Ionic and Angular.
 
 ## Features
 
