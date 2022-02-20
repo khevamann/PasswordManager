@@ -20,10 +20,11 @@
         <p class="info-header">Password</p>
         <ion-row class="password-row">
           <ion-col>
-            <ion-input #passwordVal class="info-body" [ngModel]="pass.pass" readonly></ion-input>
+            <ion-input #passwordVal class="info-body" [ngModel]="pass.pass" readonly [type]="pass.shown?'text':'password'"></ion-input>
           </ion-col>
           <ion-col>
             <ion-button size="small" (click)="copyInputMessage(passwordVal)">Copy</ion-button>
+            <ion-button size="small" (click)="data.toggleShowHidePass(pass, i)">{{pass.shown ? 'Hide' : 'Show'}}</ion-button>
           </ion-col>
         </ion-row>
         <p *ngIf="pass.notes" class="info-header">Notes</p>

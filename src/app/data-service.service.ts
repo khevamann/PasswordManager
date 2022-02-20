@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import * as saveAs from 'file-saver';
-import {HttpClient} from '@angular/common/http';
 
 export interface Password {
   name: string;
@@ -9,6 +8,7 @@ export interface Password {
   pass: string;
   notes: string;
   tags: Array<string>;
+  shown: boolean;
 }
 
 export interface Category {
@@ -28,7 +28,7 @@ export class DataProvider {
   categories: Array<Category>;
   autocomplete = {email: [], password: [], tags: []};
 
-  constructor(private storage: Storage, private http: HttpClient) {
+  constructor(private storage: Storage) {
     this.loadPasswords();
   }
 
@@ -41,7 +41,6 @@ export class DataProvider {
 
   async loadUser() {
     this.login = await this.storage.get('login') || '';
-    console.log(this.login);
   }
 
   setLogin(pass) {
@@ -163,5 +162,10 @@ export class DataProvider {
   savePasswordFile() {
     const file = new Blob([JSON.stringify(this.myPasswords)], {type: 'text/txt;charset=utf-8'});
     saveAs(file, 'pword.txt');
+  }
+
+
+  toggleShowHidePass(pass: Password, index: number) {
+    this.currPasswords[index] = {...pass, shown: !pass.shown};
   }
 }
