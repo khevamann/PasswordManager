@@ -6,7 +6,7 @@
   <a href="https://password-manager-demo1.web.app/" target='_blank'>Live App</a>
 </p>
 
-# PasswordManager
+# Password Manager
 A simple password manager I made to digitize personal passwords. PWA made using Ionic and Angular.
 
 ## Features

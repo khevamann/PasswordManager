@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
 
   async loginUser() {
     const isCorrect = await this.data.isCorrectPassword(this.pass);
-    if (!this.data.isFirstLogin) {
+    if (this.data.existingUser) {
       if (isCorrect) {
         this.data.setLogin(this.pass);
         this.data.loadPasswords();
@@ -32,6 +32,7 @@ export class LoginPage implements OnInit {
         this.error = 'Incorrect Password!';
       }
     } else {
+      this.data.setLogin(this.pass);
       this.data.loadPasswords();
       this.router.navigateByUrl('/home', {replaceUrl: true});
     }

@@ -23,7 +23,7 @@ export interface Category {
 export class DataProvider {
   filter = 'all';
   login = '';
-  isFirstLogin = true;
+  existingUser = false;
   myPasswords: Array<Password>;
   currPasswords: Array<Password>;
   categories: Array<Category>;
@@ -60,12 +60,12 @@ export class DataProvider {
   }
 
   async loadUser() {
-    this.isFirstLogin = !!await this.storage.get('isFirstLogin');
+    this.existingUser = !!await this.storage.get('existingUser');
   }
 
   setLogin(pass) {
     this.login = pass;
-    this.storage.set('isFirstLogin', false);
+    this.storage.set('existingUser', true);
   }
 
   setAutoComplete() {
