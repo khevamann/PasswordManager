@@ -11,7 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install -g angular-cli@1.0.0-beta.28.3
+      - uses: actions/setup-node@v1 #this will install Node and npm on Ubuntu
+        with:
+          node-version: '12.x'
+      - run: npm install
+#      - run: npm install -g @angular/cli@1.0.0-beta.28.3 > /dev/null
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
