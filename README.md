@@ -1,9 +1,9 @@
-<p align="center">
-   <img alt="PasswordManager Logo" title="PasswordManager Logo" src="src/assets/icons/icon-512x512.png" target="_blank" width="200">
+<p style="text-align:center">
+   <img alt="PasswordManager Logo" title="PasswordManager Logo" src="src/assets/icons/icon-512x512.png" style="width:200px">
 </p>
 
-<p align="center">
-  <a href="http://moms-passwords.firebaseapp.com/" target='_blank'>Live App</a>
+<p style="text-align:center">
+  <a href="https://password-manager-demo1.web.app/" target='_blank'>Live App</a>
 </p>
 
 # PasswordManager
